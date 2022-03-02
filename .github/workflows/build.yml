@@ -7,7 +7,7 @@ on:
     
 jobs:
   apk:
-  name: generate APK
+  name: Generate APK
   runs-on: ubuntu-latest
   steps:
   - name: Checkout
