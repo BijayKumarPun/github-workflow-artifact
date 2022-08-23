@@ -1,5 +1,5 @@
- name: Build APK file
-  on:
+name: Build APK file
+ on:
     push:
       branches:
         - 'main'
