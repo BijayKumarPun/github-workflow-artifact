@@ -16,7 +16,7 @@
             java-version: "11"
 
         - name: Build Android APK
-          run: gradlew assembleDebug --stacktrace
+          run: ./gradlew assembleDebug --stacktrace
 
         - name: Upload build
           uses: actions/upload-artifact@v3
