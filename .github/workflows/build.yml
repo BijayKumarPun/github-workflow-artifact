@@ -1,20 +1,26 @@
-name: Buld Artifact
+ name: Build APK file
+  on:
+    push:
+      branches:
+        - 'main'
+  jobs:
+    Setup-Environment:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout code
+            uses: actions/checkout@v3
 
-on:
-  push:
-    branches:
-    - main
-    
-jobs:
-  apk:
-  name: Generate APK
-  runs-on: ubuntu-latest
-  steps:
-  - name: Checkout
-  - uses: actions/checkout@v1
-  - name: Setup JDK
-  uses: actions/setup-java@v1
-  with:
-  java-version: 1.8
-  -name: Build APK
-  run: gradlew assembleDebug --stacktrace
+          - name: Setup Java
+            uses: actions/setup-java@v1
+            with:
+                  java-version: "11"
+
+          - name: Build Android APK
+          - run: gradlew assembleDebug --stacktrace
+
+          - name: Upload build
+            uses: actions/upload-artifact@v3
+            with:
+              name: debug-build
+              path: app/build/outputs/debug.apk
+
