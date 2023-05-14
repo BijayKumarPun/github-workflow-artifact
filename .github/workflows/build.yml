@@ -2,7 +2,11 @@
   on:
     push:
       branches:
-        - 'main'
+        - 'chore/pr_template'
+  concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
+
   jobs:
     Setup-Environment:
       runs-on: ubuntu-latest
