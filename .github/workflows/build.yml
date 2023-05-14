@@ -2,7 +2,7 @@
   on:
     push:
       branches:
-        - 'chore/pr_template'
+        - 'fix/concurrency'
   concurrency:
     group: ${{ github.ref }}
     cancel-in-progress: true
