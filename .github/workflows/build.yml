@@ -2,7 +2,7 @@
   on:
     push:
       branches:
-        - 'fix/concurrency'
+        - 'main'
   concurrency:
     group: ${{ github.ref }}
     cancel-in-progress: true
