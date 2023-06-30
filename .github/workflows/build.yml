@@ -36,5 +36,10 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: 'hi ${{steps.j1.outcome}}'
+            body: 'hi ${{steps.j1.outcome}}
+            
+            <details>
+            <summary> test 1 </summary>
+            test 1 full
+            </details'
             });
