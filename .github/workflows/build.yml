@@ -14,20 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      #        - name: Setup Java
-      #          uses: actions/setup-java@v1
-      #          with:
-      #            java-version: "11"
-
-      #        - name: Build Android APK
-      #          run: ./gradlew assembleDebug --stacktrace
-
-      #        - name: Upload build
-      #          uses: actions/upload-artifact@v3
-      #          with:
-      #            name: debug-build
-      #            path: app/build/outputs/apk/debug/app-debug.apk
-
       - name: Job 1
         id: j1
         run: cd a
@@ -38,20 +24,12 @@ jobs:
         run: cd app
         continue-on-error: true
 
-
       - name: Job 3
         id: j3
         run: cd b
         continue-on-error: true
 
-      #
-      #        - name: Run Android lint
-      #          id: lint
-      #          run: ./gradlew lint
-      #          continue-on-error: true
-
       - name: Comment Report
-        #          if: steps.lint.outcome != 'success'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.github_token }}
