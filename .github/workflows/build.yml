@@ -1,7 +1,6 @@
 name: Build APK File
 on:
   pull_request:
-      types: [opened, reopened, edited]
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
