@@ -39,7 +39,6 @@ jobs:
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
             const detektReport = "Detekt report here";
-            const detektResult = "success" == 'success' ? resultSuccess : resultFailure;
 
             const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
             const lintReport = "Lint report here"
