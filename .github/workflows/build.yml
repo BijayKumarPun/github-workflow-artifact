@@ -42,8 +42,8 @@ jobs:
             ### Code Analysis Summary
             | Test | Result |
             | --- | --- |
-            | Detekt | detektResult |
-            | Lint | lintResult |
+            | Detekt | ${detektResult} |
+            | Lint | ${lintResult} |
 
             ### Detail Report
 
