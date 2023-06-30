@@ -2,7 +2,7 @@
   on:
     push:
       branches:
-        - 'main'
+        - 'feat/pr_comment'
   concurrency:
     group: ${{ github.ref }}
     cancel-in-progress: true
@@ -19,11 +19,23 @@
           with:
             java-version: "11"
 
-        - name: Build Android APK
-          run: ./gradlew assembleDebug --stacktrace
+#        - name: Build Android APK
+#          run: ./gradlew assembleDebug --stacktrace
 
-        - name: Upload build
-          uses: actions/upload-artifact@v3
-          with:
-            name: debug-build
-            path: app/build/outputs/apk/debug/app-debug.apk
+#        - name: Upload build
+#          uses: actions/upload-artifact@v3
+#          with:
+#            name: debug-build
+#            path: app/build/outputs/apk/debug/app-debug.apk
+
+        - name: Run Android lint
+          id: lint
+          run: ./gradlew lint
+          continue-on-error: true
+
+        - name: Comment Report
+          if: steps.lint.outcome != 'success'
+          uses: actions/github-script@v4
+          script: |
+            github.issues.createComment({
+            lint: failed});
