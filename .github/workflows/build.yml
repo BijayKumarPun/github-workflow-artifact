@@ -32,16 +32,35 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           script: |
-            github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `
-            hi ${{steps.j1.outcome}}
+            const fs = require('fs');
+            const resultSuccess = "✅ Success";
+            const resultFailure = "❌ Failed";
+            const detektResult = resultSuccess;
+            const lintResult = resultFailure;
             
+            const commentBody = `
+            ### Code Analysis Summary
+            | Test | Result |
+            | --- | --- |
+            | Detekt | detektResult |
+            | Lint | lintResult |
+
+            ### Detail Report
+
             <details>
-            <summary> test 1 </summary>
-            test 1 full
+            <summary>Detekt full report</summary>
+            This is a sample detekt report
             </details>
-            `
+
+            <details>
+            <summary>Lint full report</summary>
+            This is a sample lint report
+            </details>
+
+            `;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
             });
