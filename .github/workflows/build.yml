@@ -54,13 +54,13 @@ jobs:
             ### Detail Report
 
             <details>
-            <summary>Detekt full report</summary>
-            ${detektReport}
+            <summary>## Detekt full report</summary>
+               ${detektReport}
             </details>
 
             <details>
-            <summary>Lint full report</summary>
-            ${lintReport}
+            <summary>## Lint full report</summary>
+                 ${lintReport}
             </details>
 
             `;
