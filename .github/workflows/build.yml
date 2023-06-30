@@ -36,6 +36,8 @@
         - name: Comment Report
           if: steps.lint.outcome != 'success'
           uses: actions/github-script@v4
-          script: |
-            github.issues.createComment({
-            lint: failed});
+          with:
+            github-token: ${{ secrets.github_toke }}
+            script: |
+              github.issues.createComment({
+              lint: failed});
