@@ -35,7 +35,7 @@ jobs:
             const fs = require('fs');
             const resultSuccess = "✅ Success";
             const resultFailure = "❌ Failure";
-            const j1Result =  ${{steps.j1.outcome}}
+            const j1Result = 'whatever';
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
             const detektReport = "Detekt report here";
