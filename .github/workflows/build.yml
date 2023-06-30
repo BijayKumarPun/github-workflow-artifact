@@ -56,7 +56,7 @@
           with:
             github-token: ${{ secrets.github_token }}
             script: |
-              let status1 = ${{steps.j1.outcome}}
+              let status1 = ${{steps.j1.outcome}};
 #              var status2 = ${{steps.j2.outcome}}
 #              var status3 = ${{steps.j3.outcome}}
               github.issues.createComment({
