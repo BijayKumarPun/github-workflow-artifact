@@ -55,12 +55,12 @@ jobs:
 
             <details>
             <summary>## Detekt full report</summary>
-               ${detektReport}
+                ${detektReport}
             </details>
 
             <details>
             <summary>## Lint full report</summary>
-                 ${lintReport}
+                ${lintReport}
             </details>
 
             `;
