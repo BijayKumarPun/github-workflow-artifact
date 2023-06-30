@@ -1,8 +1,7 @@
 name: Build APK File
 on:
-  push:
-    branches:
-      - 'feat/pr_comment'
+  pull_request:
+      types: [opened, reopened, edited]
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
