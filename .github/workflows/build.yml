@@ -14,10 +14,10 @@
         - name: Checkout code
           uses: actions/checkout@v3
 
-        - name: Setup Java
-          uses: actions/setup-java@v1
-          with:
-            java-version: "11"
+#        - name: Setup Java
+#          uses: actions/setup-java@v1
+#          with:
+#            java-version: "11"
 
 #        - name: Build Android APK
 #          run: ./gradlew assembleDebug --stacktrace
@@ -28,16 +28,33 @@
 #            name: debug-build
 #            path: app/build/outputs/apk/debug/app-debug.apk
 
-        - name: Run Android lint
-          id: lint
-          run: ./gradlew lint
-          continue-on-error: true
+        - name: Job 1
+          id: j1
+          run: cd a
+
+        - name: Job 2
+          id: j2
+          run: cd app
+
+        - name: Job 3
+          id: j3
+          run: cd b
+#
+#        - name: Run Android lint
+#          id: lint
+#          run: ./gradlew lint
+#          continue-on-error: true
 
         - name: Comment Report
-          if: steps.lint.outcome != 'success'
+#          if: steps.lint.outcome != 'success'
           uses: actions/github-script@v4
           with:
             github-token: ${{ secrets.github_toke }}
             script: |
+              var status1 = ${{steps.j1.outcome}}
+              var status2 = ${{steps.j2.outcome}}
+              var status3 = ${{steps.j3.outcome}}
               github.issues.createComment({
-              lint: failed});
+              j1: status1,
+              j2: status2,
+              j3: status3});
