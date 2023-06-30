@@ -38,11 +38,11 @@ jobs:
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
             const detektReport = "Detekt report here";
-            const detektResult = resultFailure;
+            const detektResult = ${{steps.j1.outcome}}.toString() == 'success' ? resultSuccess : resultFailure;
 
             const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
             const lintReport = "Lint report here"
-            const lintResult = resultFailure;
+            const lintResult =  resultFailure;
 
             const commentBody = `
             ### Code Analysis Summary
