@@ -41,5 +41,6 @@ jobs:
             <details>
             <summary> test 1 </summary>
             test 1 full
-            </details'
+            </details>
+            '
             });
