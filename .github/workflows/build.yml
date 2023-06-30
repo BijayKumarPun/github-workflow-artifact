@@ -37,14 +37,14 @@ jobs:
             const resultFailure = "❌ Failure";
             const resultUnknown = "⚠️ Unknown";
 
-            const detektReportFilePath = 'build.gradle';
+            const detektReportFilePath = 'builjkkjd.gradle';
             let detektResult = resultUnknown;
             let detektReport = resultUnknown;
             if (fs.existsSync(detektReportFilePath)) {
                 detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
                 detektResult = '${{steps.detekt.outcome}}' == 'success' ? resultSuccess : resultFailure;
             } 
-            const lintReportFilePath = 'gradlew.bat';
+            const lintReportFilePath = 'gradlewjjk.bat';
             
             let lintResult = resultUnknown;
             let lintReport = resultUnknown;
