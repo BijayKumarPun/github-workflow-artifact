@@ -60,5 +60,10 @@
 #              var status2 = ${{steps.j2.outcome}}
 #              var status3 = ${{steps.j3.outcome}}
               github.issues.createComment({
-              test : "this"
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '
+              test only
+              multiline'
                });
