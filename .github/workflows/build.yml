@@ -31,13 +31,19 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.github_token }}
-          script: |
+          script:  |
             const fs = require('fs');
             const resultSuccess = "✅ Success";
-            const resultFailure = "❌ Failed";
-            const detektResult = resultSuccess;
-            const lintResult = resultFailure;
-            
+            const resultFailure = "❌ Failure";
+
+            const detektReportFilePath = 'detekt/report/detekt_report.md';
+            const detektReport = "Detekt report here";
+            const detektResult = ${{steps.j1.outcome}} == 'success' ? resultSuccess : resultFailure;
+
+            const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
+            const lintReport = "Lint report here"
+            const lintResult = ${{steps.j2.outcome}} == 'success' ? resultSuccess : resultFailure;
+
             const commentBody = `
             ### Code Analysis Summary
             | Test | Result |
@@ -49,12 +55,12 @@ jobs:
 
             <details>
             <summary>Detekt full report</summary>
-            This is a sample detekt report
+            ${detektReport}
             </details>
 
             <details>
             <summary>Lint full report</summary>
-            This is a sample lint report
+            ${lintReport}
             </details>
 
             `;
