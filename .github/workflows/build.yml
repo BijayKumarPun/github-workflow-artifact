@@ -60,6 +60,5 @@
 #              var status2 = ${{steps.j2.outcome}}
 #              var status3 = ${{steps.j3.outcome}}
               github.issues.createComment({
-              j1: "status1",
-              j2: "status2",
-              j3: "status3"});
+              j1: status1
+              );
