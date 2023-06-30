@@ -44,7 +44,7 @@ jobs:
                 detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
                 detektResult = '${{steps.detekt.outcome}}' == 'success' ? resultSuccess : resultFailure;
             } 
-            const lintReportFilePath = 'app/build/reports/lint-results-debug.txt';
+            const lintReportFilePath = 'gradlew.bat';
             
             let lintResult = resultUnknown;
             let lintReport = resultUnknown;
