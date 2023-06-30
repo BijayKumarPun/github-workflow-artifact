@@ -35,20 +35,20 @@ jobs:
             const fs = require('fs');
             const resultSuccess = "✅ Success";
             const resultFailure = "❌ Failure";
-            const j1Result = '${{steps.j2.outcome}}';
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
-            const detektReport = "Detekt report here";
+            const detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
+            const detektResult = 'success' == 'success' ? resultSuccess : resultFailure;
 
             const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
-            const lintReport = "Lint report here"
-            const lintResult =  resultFailure;
+            const lintReport = fs.readFileSync(lintReportFilePath, 'utf8');
+            const lintResult = 'failure' == 'success' ? resultSuccess : resultFailure;
 
             const commentBody = `
             ### Code Analysis Summary
             | Test | Result |
             | --- | --- |
-            | Detekt | ${j1Result} |
+            | Detekt | ${detektResult} |
             | Lint | ${lintResult} |
 
             ### Detail Report
