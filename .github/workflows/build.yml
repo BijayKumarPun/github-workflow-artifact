@@ -54,7 +54,7 @@
 #          if: steps.lint.outcome != 'success'
           uses: actions/github-script@v4
           with:
-            github-token: ${{ secrets.github_toke }}
+            github-token: ${{ secrets.github_token }}
             script: |
               var status1 = ${{steps.j1.outcome}}
               var status2 = ${{steps.j2.outcome}}
