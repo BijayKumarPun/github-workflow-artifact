@@ -1,29 +1,81 @@
-  name: Build APK File
-  on:
-    push:
-      branches:
-        - 'main'
-  concurrency:
-    group: ${{ github.ref }}
-    cancel-in-progress: true
+name: Build APK File
+on:
+  pull_request:
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
-  jobs:
-    Setup-Environment:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+jobs:
+  Setup-Environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        - name: Setup Java
-          uses: actions/setup-java@v1
-          with:
-            java-version: "11"
+      - name: Job 1
+        id: j1
+        run: cd a
+        continue-on-error: true
 
-        - name: Build Android APK
-          run: ./gradlew assembleDebug --stacktrace
+      - name: Job 2
+        id: j2
+        run: cd app
+        continue-on-error: true
 
-        - name: Upload build
-          uses: actions/upload-artifact@v3
-          with:
-            name: debug-build
-            path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Job 3
+        id: j3
+        run: cd b
+        continue-on-error: true
+
+      - name: Comment Report
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.github_token }}
+          script:  |
+            const fs = require('fs');
+            const resultSuccess = "✅ Success";
+            const resultFailure = "❌ Failure";
+            const resultUnknown = "⚠️ Unknown";
+
+            const detektReportFilePath = 'builjkkjd.gradle';
+            let detektResult = resultUnknown;
+            let detektReport = resultUnknown;
+            if (fs.existsSync(detektReportFilePath)) {
+                detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
+                detektResult = '${{steps.detekt.outcome}}' == 'success' ? resultSuccess : resultFailure;
+            } 
+            const lintReportFilePath = 'gradlewjjk.bat';
+            
+            let lintResult = resultUnknown;
+            let lintReport = resultUnknown;
+            if (fs.existsSync(lintReportFilePath)) {
+             lintReport = fs.readFileSync(lintReportFilePath, 'utf8');
+             lintResult = '${{steps.lint.outcome}}' == 'success' ? resultSuccess : resultFailure;
+            }
+
+            const commentBody = `
+            ### Code Analysis Summary
+            | Test | Result |
+            | --- | --- |
+            | Detekt | ${detektResult} |
+            | Lint | ${lintResult} |
+
+            ### Detail Report
+
+            <details>
+            <summary>Detekt full report</summary>
+            ${detektReport}
+            </details>
+
+            <details>
+            <summary>Lint full report</summary>
+            ${lintReport}
+            </details>
+
+            `;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
