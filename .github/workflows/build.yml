@@ -31,15 +31,20 @@
         - name: Job 1
           id: j1
           run: cd a
+          continue-on-error: true
 
         - name: Job 2
           id: j2
           run: cd app
+          continue-on-error: true
+
 
         - name: Job 3
           id: j3
           run: cd b
-#
+          continue-on-error: true
+
+        #
 #        - name: Run Android lint
 #          id: lint
 #          run: ./gradlew lint
