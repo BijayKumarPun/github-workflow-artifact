@@ -35,14 +35,23 @@ jobs:
             const fs = require('fs');
             const resultSuccess = "✅ Success";
             const resultFailure = "❌ Failure";
+            const resultUnknown = "⚠️ Unknown";
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
-            const detektReport = 'Some report here';
-            const detektResult = 'success' == 'success' ? resultSuccess : resultFailure;
-
-            const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
-            const lintReport = 'Some report here';
-            const lintResult = 'failure' == 'success' ? resultSuccess : resultFailure;
+            let detektResult = resultUnknown;
+            let detektReport = resultUnknown;
+            if (fs.existsSync(detektReportFilePath)) {
+                detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
+                detektResult = '${{steps.detekt.outcome}}' == 'success' ? resultSuccess : resultFailure;
+            } 
+            const lintReportFilePath = 'app/build/reports/lint-results-debug.txt';
+            
+            let lintResult = resultUnknown;
+            let lintReport = resultUnknown;
+            if (fs.existsSync(lintReportFilePath)) {
+             lintReport = fs.readFileSync(lintReportFilePath, 'utf8');
+             lintResult = '${{steps.lint.outcome}}' == 'success' ? resultSuccess : resultFailure;
+            }
 
             const commentBody = `
             ### Code Analysis Summary
@@ -54,13 +63,13 @@ jobs:
             ### Detail Report
 
             <details>
-            <summary>## Detekt full report</summary>
-                <a>${detektReport}</a>
+            <summary>Detekt full report</summary>
+            ${detektReport}
             </details>
 
             <details>
-            <summary>## Lint full report</summary>
-                ${lintReport}
+            <summary>Lint full report</summary>
+            ${lintReport}
             </details>
 
             `;
