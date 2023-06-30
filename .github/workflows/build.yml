@@ -37,7 +37,7 @@ jobs:
             const resultFailure = "❌ Failure";
             const resultUnknown = "⚠️ Unknown";
 
-            const detektReportFilePath = 'detekt/report/detekt_report.md';
+            const detektReportFilePath = 'build.gradle';
             let detektResult = resultUnknown;
             let detektReport = resultUnknown;
             if (fs.existsSync(detektReportFilePath)) {
