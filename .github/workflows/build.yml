@@ -37,11 +37,11 @@ jobs:
             const resultFailure = "❌ Failure";
 
             const detektReportFilePath = 'detekt/report/detekt_report.md';
-            const detektReport = fs.readFileSync(detektReportFilePath, 'utf8');
+            const detektReport = 'Some report here';
             const detektResult = 'success' == 'success' ? resultSuccess : resultFailure;
 
             const lintReportFilePath = 'app/build/reports/lint-results-debug.html';
-            const lintReport = fs.readFileSync(lintReportFilePath, 'utf8');
+            const lintReport = 'Some report here';
             const lintResult = 'failure' == 'success' ? resultSuccess : resultFailure;
 
             const commentBody = `
