@@ -55,7 +55,7 @@ jobs:
 
             <details>
             <summary>## Detekt full report</summary>
-                ${detektReport}
+                <a>${detektReport}</a>
             </details>
 
             <details>
